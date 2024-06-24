@@ -1,96 +1,9 @@
-"""
-visas vertibas ir *1tūkst.
-"""
-# speletajs=[lauciņs, nauda, [ipasumi], [kilas], jf, [mērķi]]
 
+# visas vertibas ir *1tukst.
+# speletajs=[laucins, nauda, [ipasumi], [kilas], jf, [merki], vards]
 import random
 
-# ievies visus spēles ipasumus un visu info par tiem
-ipasumi = [
-    {"nr": 2, "price": 600, "rent": 20, "1h": 100, "2h": 300, "3h": 900,
-        "4h": 1600, "hotel": 2500, "h_cost": 500, "mortgage": 300, "color": "brown"},
-    {"nr": 4, "price": 600, "rent": 40, "1h": 200, "2h": 600, "3h": 1800,
-        "4h": 3200, "hotel": 4500, "h_cost": 500, "mortgage": 300, "color": "brown"},
-    {"nr": 7, "price": 1000, "rent": 60, "1h": 300, "2h": 900, "3h": 2700,
-        "4h": 4000, "hotel": 5500, "h_cost": 500, "mortgage": 500, "color": "l_blue"},
-    {"nr": 9, "price": 1000, "rent": 60, "1h": 300, "2h": 900, "3h": 2700,
-        "4h": 4000, "hotel": 5500, "h_cost": 500, "mortgage": 500, "color": "l_blue"},
-    {"nr": 10, "price": 1200, "rent": 80, "1h": 400, "2h": 1000, "3h": 3000,
-        "4h": 4500, "hotel": 6000, "h_cost": 500, "mortgage": 600, "color": "l_blue"},
-    {"nr": 12, "price": 1400, "rent": 100, "1h": 500, "2h": 1500, "3h": 4500,
-        "4h": 6250, "hotel": 7500, "h_cost": 1000, "mortgage": 700, "color": "pink"},
-    {"nr": 14, "price": 1400, "rent": 100, "1h": 500, "2h": 1500, "3h": 4500,
-        "4h": 6250, "hotel": 7500, "h_cost": 1000, "mortgage": 700, "color": "pink"},
-    {"nr": 15, "price": 1600, "rent": 120, "1h": 600, "2h": 1800, "3h": 5000,
-        "4h": 7000, "hotel": 9000, "h_cost": 1000, "mortgage": 800, "color": "pink"},
-    {"nr": 17, "price": 1800, "rent": 140, "1h": 700, "2h": 2000, "3h": 5500,
-        "4h": 7500, "hotel": 9500, "h_cost": 1000, "mortgage": 900, "color": "orange"},
-    {"nr": 19, "price": 1800, "rent": 140, "1h": 700, "2h": 2000, "3h": 5500,
-        "4h": 7500, "hotel": 9500, "h_cost": 1000, "mortgage": 900, "color": "orange"},
-    {"nr": 20, "price": 2000, "rent": 160, "1h": 800, "2h": 2200, "3h": 6000,
-        "4h": 8000, "hotel": 10000, "h_cost": 1000, "mortgage": 1000, "color": "orange"},
-    {"nr": 22, "price": 2200, "rent": 180, "1h": 900, "2h": 2500, "3h": 7000,
-        "4h": 8750, "hotel": 10500, "h_cost": 1500, "mortgage": 1100, "color": "red"},
-    {"nr": 24, "price": 2200, "rent": 180, "1h": 900, "2h": 2500, "3h": 7000,
-        "4h": 8750, "hotel": 10500, "h_cost": 1500, "mortgage": 1100, "color": "red"},
-    {"nr": 25, "price": 2400, "rent": 200, "1h": 1000, "2h": 3000, "3h": 7500,
-        "4h": 9250, "hotel": 11000, "h_cost": 1500, "mortgage": 1200, "color": "red"},
-    {"nr": 27, "price": 2600, "rent": 220, "1h": 1100, "2h": 3300, "3h": 8000,
-        "4h": 9750, "hotel": 11500, "h_cost": 1500, "mortgage": 1300, "color": "yellow"},
-    {"nr": 28, "price": 2600, "rent": 220, "1h": 1100, "2h": 3300, "3h": 8000,
-        "4h": 9750, "hotel": 11500, "h_cost": 1500, "mortgage": 1300, "color": "yellow"},
-    {"nr": 30, "price": 2800, "rent": 240, "1h": 1200, "2h": 3600, "3h": 8500,
-        "4h": 10250, "hotel": 12000, "h_cost": 1500, "mortgage": 1400, "color": "yellow"},
-    {"nr": 32, "price": 3000, "rent": 260, "1h": 1300, "2h": 3900, "3h": 9000,
-        "4h": 11000, "hotel": 12750, "h_cost": 2000, "mortgage": 1500, "color": "green"},
-    {"nr": 33, "price": 3000, "rent": 260, "1h": 1300, "2h": 3900, "3h": 9000,
-        "4h": 11000, "hotel": 12750, "h_cost": 2000, "mortgage": 1500, "color": "green"},
-    {"nr": 35, "price": 3200, "rent": 280, "1h": 1500, "2h": 4500, "3h": 10000,
-        "4h": 12000, "hotel": 14000, "h_cost": 2000, "mortgage": 1600, "color": "green"},
-    {"nr": 38, "price": 3500, "rent": 350, "1h": 1750, "2h": 5000, "3h": 11000,
-        "4h": 13000, "hotel": 15000, "h_cost": 2000, "mortgage": 1750, "color": "d_blue"},
-    {"nr": 40, "price": 4000, "rent": 500, "1h": 2000, "2h": 6000, "3h": 14000,
-        "4h": 17000, "hotel": 20000, "h_cost": 2000, "mortgage": 2000, "color": "d_blue"},
-    {"nr": 13, "price": 1500, "mortgage": 750, "color": "utility"},
-    {"nr": 29, "price": 1500, "mortgage": 750, "color": "utility"},
-    {"nr": 6, "price": 2000, "mortgage": 1000, "color": "station"},
-    {"nr": 16, "price": 2000, "mortgage": 1000, "color": "station"},
-    {"nr": 26, "price": 2000, "mortgage": 1000, "color": "station"},
-    {"nr": 36, "price": 2000, "mortgage": 1000, "color": "station"},
-    {"nr": 8, "color": "chance"},
-    {"nr": 23, "color": "chance"},
-    {"nr": 37, "color": "chance"},
-    {"nr": 3, "color": "chest"},
-    {"nr": 18, "color": "chest"},
-    {"nr": 34, "color": "chest"},
-    {"nr": 1, "color": "start"},
-    {"nr": 11, "color": "free"},
-    {"nr": 21, "color": "free"},
-    {"nr": 5, "color": "i_tax"},
-    {"nr": 39, "color": "s_tax"},
-    {"nr": 31, "color": "go_jail"}
-]
-
-for ip in ipasumi:
-    ip["houses"] = 0
-    ip["same"] = 0
-
-
-# kartisu kavas
-chance_kartites = ["jf", "-150", "+1500", "+500", "-3s", "l_utility", "l_25",
-                   "l_station", "l_0", "l_12", "l_40", "l_6", "l_1", "l_station", "tax_ch", "pl+500"]
-community_chest_kartites = ["pl-100", "+100", "+100", "+200", "+250", "+1000",
-                            "+1000", "+500", "+2000", "l_1", "l_0", "jf", "tax_com", "-500", "-500", "-1000"]
-
-
-def atrod_pec_nr(nr, ipasumi):  # atgriž dictionary
-    for pr in ipasumi:
-        if pr["nr"] == nr:
-            return pr
-    return None
-
-
-def chance_community(speletaji, speletajs, krasa, chance, community_chest):
+def chance_community(speletaji, speletajs, krasa, chance, community_chest, ipasumi):
     k = 0
     if krasa == "chance":
         k = chance[0]
@@ -104,35 +17,15 @@ def chance_community(speletaji, speletajs, krasa, chance, community_chest):
             community_chest.append(nonem)
     if k == "jf":
         speletajs[4] += 1
-    elif k == "-150":
-        speletajs[1] -= 150
-    elif k == "+1500":
-        speletajs[1] += 1500
-    elif k == "+500":
-        speletajs[1] += 500
-    elif k == "+100":
-        speletajs[1] += 100
-    elif k == "+200":
-        speletajs[1] += 200
-    elif k == "+250":
-        speletajs[1] += 250
-    elif k == "+1000":
-        speletajs[1] += 1000
-    elif k == "+2000":
-        speletajs[1] += 2000
-    elif k == "-1000":
-        speletajs[1] -= 1000
-    elif k == "-500":
-        speletajs[1] -= 500
-
+    
     elif k == "-3s":
         speletajs[0] -= 3
         laucins_info = next(
             (ip for ip in ipasumi if ip["nr"] == speletajs[0]), None)
         krasa = laucins_info["color"]
         if krasa == "chest" or krasa == "chance":
-            speletaji, speletajs, chance, community_chest = chance_community(
-                speletaji, speletajs, krasa, chance, community_chest)
+            speletaji, speletajs, chance, community_chest, ipasumi = chance_community(
+                speletaji, speletajs, krasa, chance, community_chest, ipasumi)
 
     elif k == "l_25":
         if speletajs[0] > 25:
@@ -165,6 +58,7 @@ def chance_community(speletaji, speletajs, krasa, chance, community_chest):
             speletajs[0] = 29
         else:
             speletajs[0] = 13
+
 
     elif k == "l_station":
         if speletajs[0] > 36 or speletajs[0] < 6:
@@ -210,96 +104,68 @@ def chance_community(speletaji, speletajs, krasa, chance, community_chest):
         for pl in speletaji:
             pl[1] -= 100
             speletajs[1] += 100
+    else:
+        speletajs[1] += int(k)
 
-    return speletaji, speletajs, chance, community_chest
+    return speletaji, speletajs, chance, community_chest, ipasumi
 
 
-def metiens():
-    double = 0
-    pirmais = random.randint(1, 6)
-    otrais = random.randint(1, 6)
-    if pirmais == otrais:
-        double = 1
-    rez = pirmais + otrais
-    return rez, double
+def atrod_pec_nr(nr, ipasumi):
+    return next((property for property in ipasumi if property["nr"] == nr), None)
 
 
 def pardosana(seller, nr, buyer, cena, ipasumi):
-    # pārliecinās, vai ir, ko pārdot un ar ko maksāt
-    if nr in (seller[2]+seller[3]) and buyer[1] >= cena:
+    # parbauda, vai ir, ko pardot, ar ko pirkt
+    if nr in (seller[2] + seller[3]) and buyer[1] >= cena:
         property = atrod_pec_nr(nr, ipasumi)
-        index = ipasumi.index(property)
 
-        # pārliecinās, vai pārdevējam nav māju uz neviena no vienādajām krāsām
-        for nr_visi in seller[2]:
-            property_visi = atrod_pec_nr(nr_visi, ipasumi)
-            index_visi = ipasumi.index(property_visi)
-            if ipasumi[index]["color"] == ipasumi[index_visi]["color"] and ipasumi[index_visi]["houses"] != 0:
-                while ipasumi[index_visi]["houses"] > 0:
-                    text = ["pawn", "1h", "2h", "3h", "4h", "hotel"]
-                    maju_skaits = ipasumi[index_visi]["houses"]
-                    ipasumi[index_visi]["houses"] -= 1
-                    seller[1] = int(seller[1])
-                    seller[1] += 0.5 * ipasumi[index_visi][text[maju_skaits]]
+        # nonem majas
+        seller_properties = {nr_visi: atrod_pec_nr(nr_visi, ipasumi) for nr_visi in seller[2]}
+        for nr_visi, prop in seller_properties.items():
+            if prop["color"] == property["color"] and prop["houses"] > 0:
+                while prop["houses"] > 0:
+                    prop["houses"] -= 1
+                    seller[1] += 0.5 * prop["h_cost"]
 
-        # noskaidro, vai ir ieķilāts, vai normāls, ieliek pareizajā mapē
+        # saliek pa vietām - no pārdevēja uz pircēju
         if nr in seller[2]:
             seller[2].remove(nr)
             buyer[2].append(nr)
-
         elif nr in seller[3]:
             seller[3].remove(nr)
             buyer[3].append(nr)
 
-        # samaksā
-        seller[1] = int(seller[1])
-        cena = int(cena)
+        # maksaa
         buyer[1] -= cena
         seller[1] += cena
 
-        # saliek same
+        # salabo same
         for speletajs in [seller, buyer]:
             same = 0
-            indeksi = []
-            for nr in (speletajs[2]+speletajs[3]):
-                prop = atrod_pec_nr(nr, ipasumi)
-                if prop["color"] == property["color"]:
-                    same += 1
-                    indeksi.append(ipasumi.index(prop))
-
-            for i in indeksi:
-                ipasumi[i]["same"] = same
+            color_properties = [atrod_pec_nr(nr, ipasumi) for nr in (speletajs[2] + speletajs[3]) if atrod_pec_nr(nr, ipasumi)["color"] == property["color"]]
+            same = len(color_properties)
+            for prop in color_properties:
+                ipasumi[ipasumi.index(prop)]["same"] = same
 
     return seller, buyer, ipasumi
 
 
 def izsole(speletaji, property_nr):
-    buyer = None
-    buyers = []
-    for sp in speletaji:  # cietumnieki nepiedalās un minimālā cena ir 100k
-        if sp[0] > 0 and sp[1] >= 100:
-            buyers.append(sp)
-
+    buyers = [sp for sp in speletaji if sp[0] > 0 and sp[1] >= 100]
     if not buyers:
         return None, 0
-    prasita_cena = 100
-    prasita_cena_new = 100  # minimālā sākumcena
-    buyers_var = buyers
+
+    prasita_cena = 100  # Minimumala sakumcena
+    buyers_var = buyers[:]
 
     while len(buyers_var) > 1:
-        prasita_cena = prasita_cena_new
-        buyers_var_new = []
+        prasita_cena_new = prasita_cena + 100
+        buyers_var = [bu for bu in buyers_var if 1 - prasita_cena/bu[1] > 0.7 and bu[1] >= prasita_cena]
 
-        for bu in buyers_var:
-            iespeja_pirkt = 1 - prasita_cena/bu[1]
-            if iespeja_pirkt > 0.7 and bu[1] >= prasita_cena:
-                buyers_var_new.append(bu)
-
-        if not buyers_var_new:
+        if not buyers_var:
             break
 
-        buyers_var = buyers_var_new
-        prasita_cena_new = prasita_cena + 100
+        prasita_cena = prasita_cena_new
 
     if len(buyers_var) == 1:
         buyer = buyers_var[0]
@@ -317,56 +183,47 @@ def naudas_ieguve(speletajs, speletaji, ipasumi):
     dargaka_m = None
     dargaka_k = None
 
-    # viesnicu pārdosana
+    # viesnicu pardošana
     for property in ipasumi:
         if property["nr"] in privatipasums and property["houses"] == 5:
             if dargaka_v is None or property["hotel"] > dargaka_v["hotel"]:
                 dargaka_v = property
     if dargaka_v is not None:
-        index = ipasumi.index(dargaka_v)
-        ipasumi[index]["houses"] += -1
-        speletajs[1] = int(speletajs[1])
-        speletajs[1] += 0.5*ipasumi[index]["hotel"]
-
-    # mājas pārdosana
+        dargaka_v["houses"] -= 1
+        speletajs[1] += 0.5 * dargaka_v["hotel"]
     else:
-        for houses in [4, 3, 2, 1]:
+        # majas pardosana
+        for houses in range(4, 0, -1):
             for property in ipasumi:
                 if property["nr"] in privatipasums and property["houses"] == houses:
-                    if dargaka_m is None or property[f"{houses}h"] > dargaka_m[f"{houses}h"]:
+                    if dargaka_m is None or property["h_cost"] > dargaka_m["h_cost"]:
                         dargaka_m = property
             if dargaka_m is not None:
-                index = ipasumi.index(dargaka_m)
-                ipasumi[index]["houses"] += -1
-                speletajs[1] = int(speletajs[1])
-                speletajs[1] += 0.5*ipasumi[index][f"{houses}h"]
+                dargaka_m["houses"] -= 1
+                speletajs[1] += 0.5 * dargaka_m["h_cost"]
                 break
 
-    # ieķilasana
-    if (dargaka_v is None) and (dargaka_m is None):
+    # iekilasana
+    if dargaka_v is None and dargaka_m is None:
         for property in ipasumi:
             if property["nr"] in privatipasums:
                 if dargaka_k is None or property["mortgage"] > dargaka_k["mortgage"]:
                     dargaka_k = property
+    
     if dargaka_k is not None:
         speletajs[2].remove(dargaka_k["nr"])
         speletajs[3].append(dargaka_k["nr"])
-        speletajs[1] = int(speletajs[1])
         speletajs[1] += dargaka_k["mortgage"]
-
-    # sasana citam
-    if (dargaka_v is None) and (dargaka_m is None) and (dargaka_k is None):
-        for numurs in (speletajs[2]+speletajs[3]):
+    else:
+        # pardosana citam
+        for numurs in (privatipasums + speletajs[3]):
             buyer, cena = izsole(speletaji, numurs)
-
             if buyer is not None:
-                index = None
-                for i in range(len(speletaji)):
-                    if buyer == speletaji[i]:
-                        index = i
-
-                speletajs, speletaji[index], ipasumi = pardosana(
-                    speletajs, numurs, buyer, cena, ipasumi)
+                for i, s in enumerate(speletaji):
+                    if buyer == s:
+                        speletajs, speletaji[i], ipasumi = pardosana(
+                            speletajs, numurs, buyer, cena, ipasumi)
+                        break
 
     return speletaji, speletajs, ipasumi
 
@@ -377,7 +234,7 @@ def nebankrotesana(speletajs, speletaji, ipasumi, chance, community_chest):
             speletajs, speletaji, ipasumi)
 
     if speletajs[4] > 0 and speletajs[1] < 0:
-        pirceji = speletaji.copy()
+        pirceji = speletaji[:]
         pirceji.remove(speletajs)
         jf_cena = 500
         velme_pirkt_vajag = 0.5
@@ -389,15 +246,14 @@ def nebankrotesana(speletajs, speletaji, ipasumi, chance, community_chest):
                 buyer[4] += 1
                 speletajs[4] -= 1
 
-# speletajs=[lauciņs, nauda, [ipasumi], [kilas], jf, [mērķis]]
     # bankrots
-    # izslēdz spēlētāju no spēles
+    # izsledz speletajuno speles
     if speletajs[1] < 0:
         if speletajs in speletaji:
             speletaji.remove(speletajs)
-            seller = speletajs.copy()
+            seller = speletajs[:]
 
-        # atliek atpakaļ jail free kartites
+        # atliek atpakal jail free kartites
         while seller[4] > 0:
             if len(chance) < 16:
                 chance.append("jf")
@@ -420,103 +276,100 @@ def nebankrotesana(speletajs, speletaji, ipasumi, chance, community_chest):
 
 
 def gajiens(speletaji, speletajs, double, ipasumi, chance, community_chest):
-    # met kauliņus
+    # met kaulinus
     d = 0
     pirmais = random.randint(1, 6)
     otrais = random.randint(1, 6)
-    if pirmais == otrais:
-        d = 1
-    rez = pirmais + otrais
-    double += d
+    d = 1 if pirmais == otrais else 0
     if d == 0:
         double == 0
-
-    # triisreiz dubultais -> cietums un gājiens beidzas
+    else:
+        double += 1
+    rez = pirmais+otrais
+    # triisreiz dubultais -> cietums un gaajiens beidzas
     if double == 3:
         speletajs[0] = 0
-        return speletaji, speletajs, double, ipasumi, chance, community_chest
+        return speletaji, speletajs, 0, ipasumi, chance, community_chest
 
     # cietums (?)
     if speletajs[0] < 1:
         speletajs[0] -= 1
 
-        # vēlme izmantot jf
+        # velme izmantot jf
         if d == 1:
             speletajs[0] = 11 + rez
         elif speletajs[4] > 0:
             speletajs[4] -= 1
             speletajs[0] = 11 + rez
-        # samaksā par izlaisanu
+        # samaksa par izlaisanu
         elif speletajs[0] <= -3:
             speletajs[1] -= 500
-            if speletajs[1] >= 500:
+            if speletajs[1] >= 0:
                 speletajs[0] = 11 + rez
             else:
-                # naudas nav, tāpēc censas to iegūt vai bankrots
-                speletajs, speletaji, ipasumi, chance, community_chest = nebankrotesana(
-                    speletajs, speletaji, ipasumi, chance, community_chest)
+                # naudas nav, taapeec censas to ieguut, vai bankrots klaat
+                speletajs, speletaji, ipasumi, chance, community_chest = nebankrotesana(speletajs, speletaji, ipasumi, chance, community_chest)
                 if speletajs is None:
-                    # ja bankrote - gājiens beidzas
+                    # ja bankrote - gaajiens beidzas
                     return speletaji, speletajs, double, ipasumi, chance, community_chest
                 else:
                     speletajs[0] = 11 + rez
     else:
-        jaunais_lauks = (speletajs[0]+rez) % 40
+        jaunais_lauks = speletajs[0]+rez
+        if jaunais_lauks > 40:
+            jaunais_lauks -= 40
 
-        # pārbauda starta naudu
+        # paarbauda starta naudu
         if jaunais_lauks < speletajs[0]:
             speletajs[1] += 2000
         speletajs[0] = jaunais_lauks
-
-    # visiem, kuri vēl ir cietumā, gājienam nav vairāk opciju
+ 
+    # visiem, kuri veel ir cietumaa, gaajienam nav vairaak opciju
     if speletajs[0] <= 0:
         return speletaji, speletajs, double, ipasumi, chance, community_chest
 
-    # ievāc ziņas par lauciņu, uz kura atrodas spēlētājs
+    # ievaac zinas par laucinu, uz kura atrodas speeleetaajs
     laucins_info = next(
         (ip for ip in ipasumi if ip["nr"] == speletajs[0]), None)
     krasa = laucins_info["color"] if laucins_info else None
 
     if krasa in ["chance", "chest"]:
-        speletaji, speletajs, chance, community_chest = chance_community(
-            speletaji, speletajs, krasa, chance, community_chest)
-        # neļaujam staigāt apkārt ar parādiem
+        speletaji, speletajs, chance, community_chest, ipasumi = chance_community(
+            speletaji, speletajs, krasa, chance, community_chest, ipasumi)
+        # nelauj staigaat apkaart ar paraadiem
         if speletajs[1] < 0:
-            speletajs, speletaji, ipasumi, chance, community_chest = nebankrotesana(
-                speletajs, speletaji, ipasumi, chance, community_chest)
+            speletajs, speletaji, ipasumi, chance, community_chest = nebankrotesana(speletajs, speletaji, ipasumi, chance, community_chest)
 
-        # pārbauda, vai nav bankrotējis
+        # paarbauda, vai nav bankroteejis
         if speletajs is None:
             return speletaji, speletajs, double, ipasumi, chance, community_chest
 
-        # izvērtē iespējamo jauno lauciņu
+        # izveertee jauno laucinu
         laucins_info = next(
             (ip for ip in ipasumi if ip["nr"] == speletajs[0]), None)
         krasa = laucins_info["color"] if laucins_info else None
 
-    # ar iesanu cietumā gājiens beidzas
+    # ar iesanu cietumaa gaajiens beidzas
     if krasa == "go_jail":
         speletajs[0] == 0
         return speletaji, speletajs, double, ipasumi, chance, community_chest
 
     elif krasa == "i_tax":
         speletajs[1] -= 2000
-        # neļaujam staigāt apkārt ar parādiem
+        # nelaujam staigat apkart ar paradiem
         if speletajs[1] < 0:
-            speletajs, speletaji, ipasumi, chance, community_chest = nebankrotesana(
-                speletajs, speletaji, ipasumi, chance, community_chest)
+            speletajs, speletaji, ipasumi, chance, community_chest = nebankrotesana(speletajs, speletaji, ipasumi, chance, community_chest)
 
     elif krasa == "s_tax":
         speletajs[1] -= 1000
-        # neļaujam staigāt apkārt ar parādiem
+        # nelauj staigaat apkaart ar paraadiem
         if speletajs[1] < 0:
-            speletajs, speletaji, ipasumi, chance, community_chest = nebankrotesana(
-                speletajs, speletaji, ipasumi, chance, community_chest)
+            speletajs, speletaji, ipasumi, chance, community_chest = nebankrotesana(speletajs, speletaji, ipasumi, chance, community_chest)
 
     elif krasa in ["free", "chance", "chest", "start", "go_jail", "i_tax", "s_tax"]:
         maksa = 0
 
-    # uzkāpsana uz ipasumiem
+    # uzkaapsana uz iipasumiem
     else:
         if speletajs[0] in (speletajs[2]+speletajs[3]):
             maksa = 0  # atrodas uz sava ipasuma
@@ -526,13 +379,13 @@ def gajiens(speletaji, speletajs, double, ipasumi, chance, community_chest):
             nav = 0
             # neatrodas uz sava ipasuma
             for sp in speletaji:
-                # pārbauda, vai ir ieķilats
+                # parbauda, vai ir iekilkats
                 if speletajs[0] in sp[3]:
                     maksa = 0
 
-                # pārbauda, vai ir nopirkts
+                # paarbauda, vai ir nopirkts
                 elif speletajs[0] in sp[2]:
-                    # atrod ipasnieku, jāsamaksā ire
+                    # atrod ipasnieku, jaasamaksaa ire
 
                     if property["color"] == "station":
                         maksa = 250*property["same"]
@@ -547,7 +400,7 @@ def gajiens(speletaji, speletajs, double, ipasumi, chance, community_chest):
                     else:
                         kop_same = sum(
                             1 for ip in ipasumi if ip["color"] == property["color"])
-                        # pārbauda, vai ipasniekam ir visi ipasumi
+                        # paarbauda, vai ir visi iipasumi
                         if kop_same == property["same"]:
                             if property["houses"] == 0:
                                 maksa = property["rent"] * 2
@@ -571,46 +424,42 @@ def gajiens(speletaji, speletajs, double, ipasumi, chance, community_chest):
 
             # nevienam nepieder
             if speletajs[1] < 0:
-                speletajs, speletaji, ipasumi, chance, community_chest = nebankrotesana(
-                    speletajs, speletaji, ipasumi, chance, community_chest)
+                speletajs, speletaji, ipasumi, chance, community_chest = nebankrotesana(speletajs, speletaji, ipasumi, chance, community_chest)
             if speletajs is None:
                 return speletaji, speletajs, double, ipasumi, chance, community_chest
 
             if len(speletaji) == nav and property is not None:
                 if speletajs is None:
                     return speletaji, speletajs, double, ipasumi, chance, community_chest
-                # var atļauties nopirkt
+                # var atlauties nopirkt
 
                 property = atrod_pec_nr(speletajs[0], ipasumi)
                 if speletajs[1] >= property["price"]:
-                    # banka pārdod
-
+                    # banka paardod
                     banka = [1, property["price"], [property["nr"]], [], 0, []]
-                    seller, speletajs, ipasumi = pardosana(
-                        banka, property["nr"], speletajs, property["price"], ipasumi)
+                    seller, speletajs, ipasumi = pardosana(banka, property["nr"], speletajs, property["price"], ipasumi)
 
-                # pārbauda, vai tas nav spēlētāja mērķis
+                # paarbauda, vai tas nav speeleetaaja meerkis
                 elif speletajs[0] in speletajs[5]:
-                    # pārbauda, vai var iegūt un nebankrotēt
-                    speletajs_tests = speletajs.copy()
-                    speletaji_tests = speletaji.copy()
-                    ipasumi_tests = ipasumi.copy()
-                    community_chest_tests = community_chest.copy()
-                    chance_tests = chance.copy()
+                    # parbauda, vai var iegadaties un nebankrotet
+                    speletajs_tests = speletajs[:]
+                    speletaji_tests = speletaji[:]
+                    ipasumi_tests = ipasumi[:]
+                    community_chest_tests = community_chest[:]
+                    chance_tests = chance[:]
 
                     # atrod indeksu
                     index = speletaji_tests.index(speletajs_tests)
 
-                    # banka "pārdod"
+                    # banka "paardod"
                     banka = [1, property["price"], [property["nr"]], [], 0, []]
                     speletajs_tests[1] += property["price"]
 
-                    seller, speletajs_tests, ipasumi_tests = pardosana(
-                        banka, property["nr"], speletajs_tests, property["price"], ipasumi_tests)
+                    seller, speletajs_tests, ipasumi_tests = pardosana(banka, property["nr"], speletajs_tests, property["price"], ipasumi_tests)
                     speletajs_tests[1] -= property["price"]
                     speletaji_tests[index] = speletajs_tests
 
-                    # neaiztiek citus mērķipasumus
+                    # neaiztiek citus meerka ipasumus
                     neaizskaramie_2 = []
                     neaizskaramie_3 = []
                     for nr in speletajs_tests[5]:
@@ -621,11 +470,10 @@ def gajiens(speletaji, speletajs, double, ipasumi, chance, community_chest):
                             speletajs_tests[3].remove(nr)
                             neaizskaramie_3.append(nr)
 
-                    # pārbauda, vai nebankrotē
-                    speletajs_tests, speletaji_tests, ipasumi_tests, chance_tests, community_chest_tests = nebankrotesana(
-                        speletajs_tests, speletaji_tests, ipasumi_tests, chance_tests, community_chest_tests)
+                    # vai nav bankrots, ja nopirks?
+                    speletajs_tests, speletaji_tests, ipasumi_tests, chance_tests, community_chest_tests = nebankrotesana(speletajs_tests, speletaji_tests, ipasumi_tests, chance_tests, community_chest_tests)
 
-                    # ja nebankrotē, tad var pirkt
+                    # ja nebankrotee, tad var pirkt
                     if speletajs_tests is not None:
                         speletajs = speletajs_tests
                         for ip in neaizskaramie_2:
@@ -636,16 +484,17 @@ def gajiens(speletaji, speletajs, double, ipasumi, chance, community_chest):
                         ipasumi = ipasumi_tests
                         community_chest = community_chest_tests
                         chance = chance_tests
+    
     if speletajs is None:
         return speletaji, speletajs, double, ipasumi, chance, community_chest
-    # papildiespējas, ja ir budžets un netiks veikti tālāki metieni
+    # papildiespeejas, ja ir budzets un netiks veikti taalaaki metieni
     if speletajs[1] > 0 and d != 1:
         iespejas = ["atkilat", "majas", "iepirkumi"]
         aktivitate = random.choice(iespejas)
 
         if aktivitate == "atkilat":
             if len(speletajs[3]) > 0:
-                kilas_nr = speletajs[3].copy()
+                kilas_nr = speletajs[3][:]  
                 random.shuffle(kilas_nr)
                 for kila_nr in kilas_nr:
                     kila = atrod_pec_nr(kila_nr, ipasumi)
@@ -655,23 +504,15 @@ def gajiens(speletaji, speletajs, double, ipasumi, chance, community_chest):
                         speletajs[2].append(kila_nr)
 
         elif aktivitate == "majas":
-            # pārbauda, vai nav pārsniegts māju/viesnicu limits
-            kop_majas = 0
-            kop_viesnicas = 0
-            for visi_ipasumi in ipasumi:
-                    if visi_ipasumi["houses"] == 5:
-                        kop_viesnicas += 1
-                    elif visi_ipasumi["houses"] != 5:
-                        kop_majas += visi_ipasumi["houses"]
+            # viesnicu un maju limiti
+            kop_majas = sum(visi_ipasumi["houses"] for visi_ipasumi in ipasumi if visi_ipasumi["houses"] != 5)
+            kop_viesnicas = sum(1 for visi_ipasumi in ipasumi if visi_ipasumi["houses"] == 5)
             
-            apbuvejami = []
-            for ip_nr in speletajs[2]:
-                ip = atrod_pec_nr(ip_nr, ipasumi)
-                if ip.get("1h") is not None:
-                    kop_same = sum(
-                        1 for i in ipasumi if i["color"] == ip["color"])
-                    if ip["same"] == kop_same and ip["houses"] != 5:
-                        apbuvejami.append(ip_nr)
+            kop_same_visi = {ip["color"]: sum(1 for i in ipasumi if i["color"] == ip["color"]) for ip in ipasumi}
+            apbuvejami = [ip_nr for ip_nr in speletajs[2] if (atrod_pec_nr(ip_nr, ipasumi) is not None and
+                atrod_pec_nr(ip_nr, ipasumi).get("1h") is not None and  
+                atrod_pec_nr(ip_nr, ipasumi)["same"] == kop_same_visi[atrod_pec_nr(ip_nr, ipasumi)["color"]] and
+                atrod_pec_nr(ip_nr, ipasumi)["houses"] != 5)]
 
             if len(apbuvejami) > 0:
                 random.shuffle(apbuvejami)
@@ -679,18 +520,18 @@ def gajiens(speletaji, speletajs, double, ipasumi, chance, community_chest):
                     apbuve = atrod_pec_nr(apbuve_nr, ipasumi)
                     if apbuve["color"] not in ["utilities", "station"]:
                         house_new = apbuve["houses"] + 1
-                        if house_new == 5 and speletajs[1] >= 1.5*apbuve["hotel"] and kop_viesnicas < 12:
-                            speletajs[1] -= apbuve["hotel"]
+                        if house_new == 5 and speletajs[1] >= 1.5*apbuve["h_cost"] and kop_viesnicas < 12:
+                            speletajs[1] -= apbuve["h_cost"]
                             index = ipasumi.index(apbuve)
                             ipasumi[index]["houses"] += 1
 
-                        elif house_new < 5 and speletajs[1] >= 1.5*apbuve[f"{house_new}h"] and kop_majas < 32:
-                            speletajs[1] -= apbuve[f"{house_new}h"]
+                        elif house_new < 5 and speletajs[1] >= 1.5*apbuve["h_cost"] and kop_majas < 32:
+                            speletajs[1] -= apbuve["h_cost"]
                             index = ipasumi.index(apbuve)
                             ipasumi[index]["houses"] += 1
 
         elif aktivitate == "iepirkumi":
-            # no mērķiem
+            # no meerkiem
             done = 0
             for sp_nr in speletajs[5]:
                 for cits in speletaji:
@@ -698,19 +539,19 @@ def gajiens(speletaji, speletajs, double, ipasumi, chance, community_chest):
                         for cits_nr in (cits[2]+cits[3]):
                             # ir mekletajs
                             if cits_nr == sp_nr:
-                                # noskaidro, kāda ir cena
+                                # noskaidro, kaada ir cena
                                 k = 1
-                                # vai viņam ir citi
+                                # vai vinam ir citi (godiigas cenas mekleejumi)
                                 karotais_ipasums = atrod_pec_nr(sp_nr, ipasumi)
                                 k *= karotais_ipasums["same"]
-                                # vai viņam ir majas
+                                # vai vinam ir majas
                                 k *= karotais_ipasums["houses"] + 1
 
                                 cena = 2*k*karotais_ipasums["price"]
 
-                                # vai var atļauties?
+                                # vai var atlautiess?
                                 if cena <= speletajs[1]:
-                                    # pērk
+                                    # peerk
                                     cits, speletajs, ipasumi = pardosana(
                                         cits, sp_nr, speletajs, cena, ipasumi)
                                     done = 1
@@ -727,18 +568,18 @@ def gajiens(speletaji, speletajs, double, ipasumi, chance, community_chest):
                             for cits_nr in (cits[2]+cits[3]):
                                 cits_ip = atrod_pec_nr(cits_nr, ipasumi)
                                 if cits_ip["color"] == sp_ip["color"]:
-                                    # ir vienāds same
-                                    # meklē cenu
+                                    # ir vienaas same
+                                    # meklee cenu
                                     k = 1
-                                    # vai viņam ir citi
+                                    # vai viÅam ir citi
                                     k *= cits_ip["same"]
-                                    # vai viņam ir majas
+                                    # vai vinamm ir majas
                                     k *= cits_ip["houses"] + 1
 
                                     cena = 2*k*cits_ip["price"]
 
                                     if cena <= speletajs[1]:
-                                        # pērk
+                                        # peerk
                                         cits, speletajs, ipasumi = pardosana(
                                             cits, cits_nr, speletajs, cena, ipasumi)
                                         done = 1
@@ -746,10 +587,9 @@ def gajiens(speletaji, speletajs, double, ipasumi, chance, community_chest):
                         if done != 0:
                             break
 
-    # navar pabeigt ar parādiem
+    # navar pabeigt ar paraadiem
     if speletajs[1] < 0:
-        speletajs, speletaji, ipasumi, chance, community_chest = nebankrotesana(
-            speletajs, speletaji, ipasumi, chance, community_chest)
+        speletajs, speletaji, ipasumi, chance, community_chest = nebankrotesana(speletajs, speletaji, ipasumi, chance, community_chest)
 
     if double > 0:
         speletaji, speletajs, double, ipasumi, chance, community_chest = gajiens(
@@ -758,53 +598,98 @@ def gajiens(speletaji, speletajs, double, ipasumi, chance, community_chest):
     return speletaji, speletajs, double, ipasumi, chance, community_chest
 
 
-def spele(merki, chance_kartites, community_chest_kartites, ipasumi):
-    # samaisa kārsu kavas pirms spēles
-    chance = chance_kartites
-    random.shuffle(chance)
-    community_chest = community_chest_kartites
+def spele(merki):
+    chance_kartites = ["jf", "-150", "+1500", "+500", "-3s", "l_utility", "l_25", "l_station", "l_0", "l_12", "l_40", "l_6", "l_1", "l_station", "tax_ch", "pl+500"]
+    community_chest_kartites = ["pl-100", "+100", "+100", "+200", "+250", "+1000", "+1000", "+500", "+2000", "l_1", "l_0", "jf", "tax_com", "-500", "-500", "-1000"]
+
+    random.shuffle(chance_kartites)
     random.shuffle(community_chest_kartites)
 
-    # sagatavo spēlētājus
-    speletaji = []
-    for m in merki:
-        # speletajs = [lauciņs, nauda, [ipasumi], [ķilas], jf, [mērķi]]
-        sp = [1, 15000, [], [], 0, m]
-        speletaji.append(sp)
+    chance = chance_kartites
+    community_chest = community_chest_kartites    
+    #visi ipasumi
+    ipasumi =  [
+    {"nr": 2, "price": 600, "rent": 20, "1h": 100, "2h": 300, "3h": 900, "4h": 1600, "hotel": 2500, "h_cost": 500, "mortgage": 300, "color": "brown", "same": 0, "houses": 0},
+    {"nr": 4, "price": 600, "rent": 40, "1h": 200, "2h": 600, "3h": 1800, "4h": 3200, "hotel": 4500, "h_cost": 500, "mortgage": 300, "color": "brown", "same": 0, "houses": 0},
+    {"nr": 7, "price": 1000, "rent": 60, "1h": 300, "2h": 900, "3h": 2700, "4h": 4000, "hotel": 5500, "h_cost": 500, "mortgage": 500, "color": "l_blue", "same": 0, "houses": 0},
+    {"nr": 9, "price": 1000, "rent": 60, "1h": 300, "2h": 900, "3h": 2700, "4h": 4000, "hotel": 5500, "h_cost": 500, "mortgage": 500, "color": "l_blue", "same": 0, "houses": 0},
+    {"nr": 10, "price": 1200, "rent": 80, "1h": 400, "2h": 1000, "3h": 3000, "4h": 4500, "hotel": 6000, "h_cost": 500, "mortgage": 600, "color": "l_blue", "same": 0, "houses": 0},
+    {"nr": 12, "price": 1400, "rent": 100, "1h": 500, "2h": 1500, "3h": 4500, "4h": 6250, "hotel": 7500, "h_cost": 1000, "mortgage": 700, "color": "pink", "same": 0, "houses": 0},
+    {"nr": 14, "price": 1400, "rent": 100, "1h": 500, "2h": 1500, "3h": 4500, "4h": 6250, "hotel": 7500, "h_cost": 1000, "mortgage": 700, "color": "pink", "same": 0, "houses": 0},
+    {"nr": 15, "price": 1600, "rent": 120, "1h": 600, "2h": 1800, "3h": 5000, "4h": 7000, "hotel": 9000, "h_cost": 1000, "mortgage": 800, "color": "pink", "same": 0, "houses": 0},
+    {"nr": 17, "price": 1800, "rent": 140, "1h": 700, "2h": 2000, "3h": 5500, "4h": 7500, "hotel": 9500, "h_cost": 1000, "mortgage": 900, "color": "orange", "same": 0, "houses": 0},
+    {"nr": 19, "price": 1800, "rent": 140, "1h": 700, "2h": 2000, "3h": 5500, "4h": 7500, "hotel": 9500, "h_cost": 1000, "mortgage": 900, "color": "orange", "same": 0, "houses": 0},
+    {"nr": 20, "price": 2000, "rent": 160, "1h": 800, "2h": 2200, "3h": 6000, "4h": 8000, "hotel": 10000, "h_cost": 1000, "mortgage": 1000, "color": "orange", "same": 0, "houses": 0},
+    {"nr": 22, "price": 2200, "rent": 180, "1h": 900, "2h": 2500, "3h": 7000, "4h": 8750, "hotel": 10500, "h_cost": 1500, "mortgage": 1100, "color": "red", "same": 0, "houses": 0},
+    {"nr": 24, "price": 2200, "rent": 180, "1h": 900, "2h": 2500, "3h": 7000, "4h": 8750, "hotel": 10500, "h_cost": 1500, "mortgage": 1100, "color": "red", "same": 0, "houses": 0},
+    {"nr": 25, "price": 2400, "rent": 200, "1h": 1000, "2h": 3000, "3h": 7500, "4h": 9250, "hotel": 11000, "h_cost": 1500, "mortgage": 1200, "color": "red", "same": 0, "houses": 0},
+    {"nr": 27, "price": 2600, "rent": 220, "1h": 1100, "2h": 3300, "3h": 8000, "4h": 9750, "hotel": 11500, "h_cost": 1500, "mortgage": 1300, "color": "yellow", "same": 0, "houses": 0},
+    {"nr": 28, "price": 2600, "rent": 220, "1h": 1100, "2h": 3300, "3h": 8000, "4h": 9750, "hotel": 11500, "h_cost": 1500, "mortgage": 1300, "color": "yellow", "same": 0, "houses": 0},
+    {"nr": 30, "price": 2800, "rent": 240, "1h": 1200, "2h": 3600, "3h": 8500, "4h": 10250, "hotel": 12000, "h_cost": 1500, "mortgage": 1400, "color": "yellow", "same": 0, "houses": 0},
+    {"nr": 32, "price": 3000, "rent": 260, "1h": 1300, "2h": 3900, "3h": 9000, "4h": 11000, "hotel": 12750, "h_cost": 2000, "mortgage": 1500, "color": "green", "same": 0, "houses": 0},
+    {"nr": 33, "price": 3000, "rent": 260, "1h": 1300, "2h": 3900, "3h": 9000, "4h": 11000, "hotel": 12750, "h_cost": 2000, "mortgage": 1500, "color": "green", "same": 0, "houses": 0},
+    {"nr": 35, "price": 3200, "rent": 280, "1h": 1500, "2h": 4500, "3h": 10000, "4h": 12000, "hotel": 14000, "h_cost": 2000, "mortgage": 1600, "color": "green", "same": 0, "houses": 0},
+    {"nr": 38, "price": 3500, "rent": 350, "1h": 1750, "2h": 5000, "3h": 11000, "4h": 13000, "hotel": 15000, "h_cost": 2000, "mortgage": 1750, "color": "d_blue", "same": 0, "houses": 0},
+    {"nr": 40, "price": 4000, "rent": 500, "1h": 2000, "2h": 6000, "3h": 14000, "4h": 17000, "hotel": 20000, "h_cost": 2000, "mortgage": 2000, "color": "d_blue", "same": 0, "houses": 0},
+    {"nr": 13, "price": 1500, "mortgage": 750, "color": "utility", "same": 0, "houses": 0},
+    {"nr": 29, "price": 1500, "mortgage": 750, "color": "utility", "same": 0, "houses": 0},
+    {"nr": 6, "price": 2000, "mortgage": 1000, "color": "station", "same": 0, "houses": 0},
+    {"nr": 16, "price": 2000, "mortgage": 1000, "color": "station", "same": 0, "houses": 0},
+    {"nr": 26, "price": 2000, "mortgage": 1000, "color": "station", "same": 0, "houses": 0},
+    {"nr": 36, "price": 2000, "mortgage": 1000, "color": "station", "same": 0, "houses": 0},
+    {"nr": 8, "color": "chance","same": 0, "houses": 0},
+    {"nr": 23, "color": "chance", "same": 0, "houses": 0},
+    {"nr": 37, "color": "chance", "same": 0, "houses": 0},
+    {"nr": 3, "color": "chest", "same": 0, "houses": 0},
+    {"nr": 18, "color": "chest", "same": 0, "houses": 0},
+    {"nr": 34, "color": "chest", "same": 0, "houses": 0},
+    {"nr": 1, "color": "start", "same": 0, "houses": 0},
+    {"nr": 11, "color": "free", "same": 0, "houses": 0},
+    {"nr": 21, "color": "free", "same": 0, "houses": 0},
+    {"nr": 5, "color": "i_tax", "same": 0, "houses": 0},
+    {"nr": 39, "color": "s_tax", "same": 0, "houses": 0},
+    {"nr": 31, "color": "go_jail", "same": 0, "houses": 0}]
+    
+    # rada speletajus
+    vards = ["es", "Elis","tetis", "mamma"]
+    speletaji = [[1, 15000, [], [], 0, m, id] for m in merki for id in vards]
 
-    # randomizēti izvēlas spēlētāju secibu
+    # izvelas secibu
     random.shuffle(speletaji)
-
-    speles_gaita = [speletaji.copy()]
-    speles_ipasumi = [ipasumi.copy()]
-    sakotnejais_sp_skaits = len(speletaji)
-
     while len(speletaji) > 1:
         for speletajs in speletaji:
-            double = 0
             speletaji, speletajs, double, ipasumi, chance, community_chest = gajiens(
-                speletaji, speletajs, double, ipasumi, chance, community_chest)
-            if len(speletaji) != sakotnejais_sp_skaits:
-                speles_gaita.append(speletaji.copy())
-                speles_ipasumi.append(ipasumi.copy())
-                sakotnejais_sp_skaits = len(speletaji)
+                speletaji, speletajs, 0, ipasumi, chance, community_chest)
+    # atgriez uzvareetaaju
+    return speletaji[0][6]
 
-    return speles_gaita, speles_ipasumi
 
-win = 0
-dati = []
-for mans_merkis in [[2], [4], [6], [7], [9], [10], [12], [14], [15], [16], [17], [19], [20], [22], [24], [25], [26], [27], [28], [29], [30], [32], [33], [35], [36], [38], [40]]:
-    print("==============")
-    print(mans_merkis)
-    reizes = 0
-    while reizes < 10:
-        merki = [mans_merkis, [38, 40], [13, 29], [22, 24, 25]]
-        sp_g, sp_ip = spele(merki, chance_kartites, community_chest_kartites, ipasumi)
+def play_game(mans_merkis):
+    merki = [mans_merkis, [38, 40], [13, 29], [22, 24, 25]]
+    results = spele(merki)
+    win = 1 if results == "es" else 0
+    
+    return {"mans_merkis": mans_merkis, "uzvaras": win}
 
-        if sp_g[-1][0][5] == mans_merkis:
-            win += 1
-        reizes += 1
-        print(reizes)
-    dati.append({"mans mērķis": mans_merkis, "uzvaras": win})
-print(dati)
+rez_l = []
 
+for i in range(5):
+    for m in [[2, 4], [7, 9, 10], [12, 14, 15], [17, 19, 20], [22, 24, 25], [27, 28, 30], [32, 33, 35], [6, 16, 26, 36], [38, 40], [13, 29]]:
+        rez = play_game(m)
+        rez_l.append(rez)
+    print(1)
+print(rez_l)
+
+uzvaras = {}
+
+for entry in rez_l:
+    merkis_tuple = tuple(entry['mans_merkis'])
+    if merkis_tuple in uzvaras:
+        uzvaras[merkis_tuple] += entry['uzvaras']
+    else:
+        uzvaras[merkis_tuple] = entry['uzvaras']
+
+rez_l = [{'mans_merkis': list(merkis), 'uzvaras': victories} for merkis, victories in uzvaras.items()]
+print(rez_l)
+
+# atkārto,  cik dators lauj
